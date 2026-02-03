@@ -22,9 +22,10 @@
             background: linear-gradient(135deg, #FFD1DC 0%, #3E2723 100%);
             font-family: 'Montserrat', sans-serif;
             color: white; overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* 1. Magical Floating Lanterns */
+        /* Magical Floating Lanterns & Sparkles */
         .lantern {
             position: fixed; color: var(--dim-yellow);
             opacity: 0.4; pointer-events: none;
@@ -36,7 +37,6 @@
             100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
         }
 
-        /* Sparkles */
         .sparkle {
             position: fixed; background: #fff; border-radius: 50%;
             pointer-events: none; opacity: 0.6;
@@ -49,9 +49,9 @@
             min-height: 100vh; padding: 40px 20px; position: relative; z-index: 10;
         }
 
-        /* 2. Frosted Glass Container */
+        /* Container */
         .container {
-            width: 100%; max-width: 450px;
+            width: 100%; max-width: 480px;
             background: rgba(45, 27, 24, 0.85);
             backdrop-filter: blur(25px); border-radius: 50px;
             padding: 45px 30px; border: 1px solid rgba(248, 187, 208, 0.3);
@@ -60,11 +60,12 @@
         }
 
         .arabic-name {
-            font-family: 'Amiri', serif; font-size: 5.5rem;
+            font-family: 'Amiri', serif; font-size: clamp(3.5rem, 12vw, 5.5rem);
             margin: 0; color: white; text-shadow: 0 0 20px var(--hot-pink);
             line-height: 1.1; direction: rtl;
         }
 
+        /* Flower & Icons */
         .flower-container { margin: 15px 0; display: flex; justify-content: center; position: relative; }
         .ramadan-icon { 
             position: absolute; font-size: 1.5rem; color: var(--dim-yellow);
@@ -72,7 +73,8 @@
             text-shadow: 0 0 15px var(--dim-yellow);
         }
         .left-moon { left: 10%; top: 0; }
-        .right-star { right: 10%; bottom: 0; color: var(--neon-green); font-size: 1rem; }
+        .right-star { right: 10%; bottom: 0; color: var(--neon-green); }
+
         @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-15px); } }
 
         .flower { position: relative; width: 70px; height: 70px; animation: bloom 4s ease-in-out forwards; }
@@ -86,13 +88,12 @@
         .petal:nth-child(3) { transform: rotate(144deg); } .petal:nth-child(4) { transform: rotate(216deg); } 
         .petal:nth-child(5) { transform: rotate(288deg); }
 
-        /* 3. Interactive Profile Image */
         .profile-img {
-            width: 160px; height: 160px;
+            width: 150px; height: 150px;
             border-radius: 50%; border: 4px solid var(--pink);
             box-shadow: 0 0 30px var(--hot-pink);
             object-fit: cover; margin: 15px auto; display: block;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
         }
         .profile-img:hover { transform: scale(1.1) rotate(3deg); }
@@ -100,58 +101,76 @@
         .ramadan-banner {
             margin: 20px 0; font-weight: bold; font-size: 1.4rem;
             background: linear-gradient(to right, #4CAF50, #FFD700, #4CAF50);
-            background-size: 200% auto;
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
+            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite, pulseGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px var(--hot-pink); }
+            to { text-shadow: 0 0 15px #fff, 0 0 25px var(--dim-yellow); }
         }
         @keyframes shine { to { background-position: 200% center; } }
 
         .english-name {
             font-family: 'Dancing Script', cursive; font-size: 3.5rem;
             color: var(--pink); margin: 5px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .player {
-            background: rgba(255, 255, 255, 0.05); border-radius: 25px;
+        /* Stats & Quran Schedule Styles */
+        .stats-grid { display: flex; gap: 12px; margin: 25px 0; }
+        .stat-card {
+            flex: 1; background: rgba(248, 187, 208, 0.1);
+            padding: 15px 5px; border-radius: 20px; border: 1px solid rgba(248, 187, 208, 0.3);
+            transition: 0.3s;
+        }
+        .stat-card:hover { background: rgba(248, 187, 208, 0.2); transform: translateY(-3px); }
+        .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--dim-yellow); display: block; }
+        .stat-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--pink); }
+
+        .quran-container {
+            background: rgba(0, 0, 0, 0.25); border-radius: 30px;
             padding: 20px; margin: 25px 0; border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .search-container { display: flex; gap: 10px; }
+        .quran-header { font-size: 1.1rem; color: var(--pink); margin-bottom: 15px; font-weight: bold; }
+        .quran-scroll { max-height: 220px; overflow-y: auto; padding-right: 5px; }
+        .quran-scroll::-webkit-scrollbar { width: 4px; }
+        .quran-scroll::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 10px; }
+
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { font-size: 0.7rem; text-transform: uppercase; color: var(--hot-pink); padding-bottom: 10px; }
+        td { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+        .check-btn { 
+            background: none; border: none; color: var(--neon-green); 
+            cursor: pointer; font-size: 1.2rem; transition: 0.3s; 
+        }
+        .check-btn:hover { transform: scale(1.2); opacity: 0.8; }
+
+        .search-container { display: flex; gap: 10px; margin: 20px 0; }
         .search-bar {
             flex: 1; background: rgba(0,0,0,0.2); border: 1px solid var(--pink);
-            padding: 14px; border-radius: 15px; color: white; outline: none;
-            font-family: 'Montserrat', sans-serif; transition: 0.3s;
+            padding: 12px; border-radius: 15px; color: white; outline: none;
         }
-        .search-bar:focus { border-color: var(--dim-yellow); box-shadow: 0 0 10px rgba(255,215,0,0.2); }
         .search-btn { 
-            background: var(--pink); color: var(--chocolate); 
-            border: none; border-radius: 15px; padding: 0 20px; cursor: pointer;
-            font-size: 1.1rem; transition: 0.3s;
+            background: var(--pink); color: var(--chocolate); border: none; 
+            border-radius: 15px; padding: 0 15px; cursor: pointer;
         }
-        .search-btn:hover { background: var(--hot-pink); transform: translateY(-2px); }
 
         .telegram-btn {
             display: inline-flex; background: var(--neon-green); color: #000;
-            width: 60px; height: 60px; border-radius: 50%;
-            align-items: center; justify-content: center; font-size: 1.8rem;
-            text-decoration: none; box-shadow: 0 10px 20px rgba(57, 255, 20, 0.3);
-            margin-bottom: 30px; transition: 0.3s;
+            width: 55px; height: 55px; border-radius: 50%;
+            align-items: center; justify-content: center; font-size: 1.5rem;
+            text-decoration: none; margin-bottom: 25px; transition: 0.3s;
         }
-        .telegram-btn:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 25px rgba(57, 255, 20, 0.5); }
+        .telegram-btn:hover { transform: scale(1.1) rotate(10deg); }
 
         .secret-section {
-            padding: 25px; border-radius: 35px;
+            padding: 20px; border-radius: 30px;
             background: rgba(255, 255, 255, 0.03); border: 1px dashed var(--pink);
         }
         .pass-input {
             background: rgba(255, 255, 255, 0.08); border: 1px solid var(--pink);
-            padding: 14px; border-radius: 15px; color: white; text-align: center; width: 85%; margin-bottom: 15px; outline: none;
+            padding: 12px; border-radius: 12px; color: white; text-align: center; width: 80%; margin-bottom: 10px;
         }
-        #secret-content { 
-            display: none; font-family: 'Courier New', monospace; 
-            font-size: 1.1rem; line-height: 1.6; text-align: left;
-            animation: fadeIn 1s ease;
-        }
+        #secret-content { display: none; font-size: 0.95rem; line-height: 1.6; text-align: left; animation: fadeIn 1s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -173,17 +192,40 @@
 
             <img src="nusi.jpg" alt="Nuseybah" class="profile-img" id="mainPhoto">
             
-            <div class="ramadan-banner">
-                🌙 𝓡𝓪𝓶𝓪𝓭𝓪𝓷 𝓜𝓾𝓫𝓪𝓻𝓪𝓴 ✨
+            <div class="ramadan-banner">🌙 𝓡𝓪𝓶𝓪𝓭𝓪𝓷 𝓜𝓾𝓫𝓪𝓻𝓪𝓴 ✨</div>
+            <div class="english-name">𝓝𝓾𝓼𝓮𝔂𝓫𝓪𝓱</div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span id="days-left" class="stat-value">--</span>
+                    <span class="stat-label">Days Until</span>
+                </div>
+                <div class="stat-card">
+                    <span id="ramadan-day" class="stat-value">--</span>
+                    <span class="stat-label">Ramadan Day</span>
+                </div>
             </div>
 
-            <div class="english-name">𝓝𝓾𝓼𝓮𝔂𝓫𝓪𝓱</div>
-            
-            <div class="player">
-                <div class="search-container">
-                    <input type="text" id="musicSearch" class="search-bar" placeholder="Nasheed for Nuseybah...">
-                    <button class="search-btn" onclick="searchMusic()"><i class="fas fa-search"></i></button>
+            <div class="quran-container">
+                <div class="quran-header">📖 3x Khatm Plan (3 Juz Daily)</div>
+                <div class="quran-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Goal</th>
+                                <th>Done</th>
+                            </tr>
+                        </thead>
+                        <tbody id="quran-body">
+                            </tbody>
+                    </table>
                 </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="musicSearch" class="search-bar" placeholder="Nasheed for Nuseybah...">
+                <button class="search-btn" onclick="searchMusic()"><i class="fas fa-search"></i></button>
             </div>
 
             <a href="https://t.me/nusi53" target="_blank" class="telegram-btn">
@@ -194,65 +236,106 @@
                 <div id="lock-title" style="margin-bottom: 12px; font-weight: bold; color: var(--pink);">🔒 A Surprise for Nuseybah</div>
                 <input type="password" id="passInput" class="pass-input" placeholder="Password: nuseybah">
                 <br>
-                <button onclick="checkPass()" style="background: var(--pink); color: var(--chocolate); padding: 12px 30px; border-radius: 15px; border:none; font-weight: bold; cursor:pointer;">Unlock Surprise</button>
+                <button onclick="checkPass()" style="background: var(--pink); color: var(--chocolate); padding: 10px 25px; border-radius: 12px; border:none; font-weight: bold; cursor:pointer;">Unlock</button>
                 
                 <div id="secret-content">
                     ✨ 𝙳𝚎𝚊𝚛𝚎𝚜𝚝 𝙽𝚞𝚜𝚎𝚢𝚋𝚊𝚑 ✨<br><br>
-                    𝚁𝚊𝚖𝚊𝚍𝚊𝚗 𝙼𝚞𝚋𝚊𝚛𝚊𝚔! 𝙼𝚊𝚢 𝚝𝚑𝚒𝚜 𝚑𝚘𝚕𝚢 𝚖𝚘𝚗𝚝𝚑 𝚋𝚛𝚒𝚗𝚐 𝚢𝚘𝚞 𝚙𝚎𝚊𝚌𝚎, 𝚓𝚘𝚢, 𝚊𝚗𝚍 𝚎𝚗𝚍𝚕𝚎𝚜𝚜 𝚋𝚕𝚎𝚜𝚜𝚒𝚗𝚐𝚜. 🌙<br><br>
-                    𝚈𝚘𝚞 𝚊𝚛𝚎 𝚊 𝚖𝚊𝚜𝚝𝚎𝚛𝚙𝚒𝚎𝚌𝚎 𝚌𝚛𝚎𝚊𝚝𝚎𝚍 𝚋𝚢 𝚝𝚑𝚎 𝙱𝚎𝚜𝚝 𝚘𝚏 𝙲𝚛𝚎𝚊𝚝𝚘𝚛𝚜. 𝚈𝚘𝚞𝚛 𝚑𝚎𝚊𝚛𝚝 𝚒𝚜 𝚊𝚜 𝚋𝚛𝚒𝚐𝚑𝚝 𝚊𝚜 𝚙𝚒𝚗𝚔 𝚊𝚗𝚍 𝚊𝚜 𝚜𝚠𝚎𝚎𝚝 𝚊𝚜 𝚌𝚑𝚘𝚌𝚘𝚕𝚊𝚝𝚎. 🎀<br><br>
-                    𝚂𝚝𝚊𝚢 𝚜𝚝𝚛𝚘𝚗𝚐 𝚊𝚗𝚍 𝚋𝚎𝚊𝚞𝚝𝚒𝚏𝚞𝚕! 🍫✨
+                    𝙼𝚊𝚢 𝚝𝚑𝚒𝚜 𝚁𝚊𝚖𝚊𝚍𝚊𝚗 𝚋𝚎 𝚝𝚑𝚎 𝚖𝚘𝚜𝚝 𝚝𝚛𝚊𝚗𝚜𝚏𝚘𝚛𝚖𝚊𝚝𝚒𝚟𝚎 𝚘𝚗𝚎 𝚢𝚎𝚝. 𝚈𝚘𝚞𝚛 𝚍𝚎𝚍𝚒𝚌𝚊𝚝𝚒𝚘𝚗 𝚝𝚘 𝚝𝚑𝚎 𝚀𝚞𝚛𝚊𝚗 (𝟹𝚡 𝙺𝚑𝚊𝚝𝚖!) 𝚒𝚜 𝚒𝚗𝚜𝚙𝚒𝚛𝚒𝚗𝚐. 🌙<br><br>
+                    𝚁𝚎𝚖𝚎𝚖𝚋𝚎𝚛: "𝚃𝚑𝚎 𝚋𝚎𝚜𝚝 𝚊𝚖𝚘𝚗𝚐 𝚢𝚘𝚞 𝚊𝚛𝚎 𝚝𝚑𝚘𝚜𝚎 𝚠𝚑𝚘 𝚕𝚎𝚊𝚛𝚗 𝚝𝚑𝚎 𝚀𝚞𝚛𝚊𝚗 𝚊𝚗𝚍 𝚝𝚎𝚊𝚌𝚑 𝚒𝚝."<br><br>
+                    𝚂𝚝𝚊𝚢 𝚜𝚝𝚛𝚘𝚗𝚐, 𝚂𝚑𝚒𝚗𝚎 𝚋𝚛𝚒𝚐𝚑𝚝! 🍫🎀
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. Photo Click Confetti
+        // --- 1. CONFIGURATION & DATES ---
+        const ramadanStartDate = new Date("February 18, 2026 00:00:00").getTime();
+
+        function updateRamadanStats() {
+            const now = new Date().getTime();
+            const diff = ramadanStartDate - now;
+            const daysToRamadan = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            
+            const daysLeftEl = document.getElementById('days-left');
+            const ramadanDayEl = document.getElementById('ramadan-day');
+
+            if (daysToRamadan > 0) {
+                daysLeftEl.innerText = daysToRamadan;
+                ramadanDayEl.innerText = "Prep";
+            } else {
+                daysLeftEl.innerText = "0";
+                const dayOfRamadan = Math.abs(daysToRamadan) + 1;
+                ramadanDayEl.innerText = dayOfRamadan <= 30 ? dayOfRamadan : "Eid!";
+            }
+        }
+        updateRamadanStats();
+
+        // --- 2. QURAN SCHEDULE GENERATOR ---
+        const quranBody = document.getElementById('quran-body');
+        for (let d = 1; d <= 30; d++) {
+            // For 3 Khatms, you read 3 Juz per day
+            let startJuz = ((d - 1) * 3) % 30 + 1;
+            let endJuz = startJuz + 2;
+            if (endJuz > 30) endJuz = 30;
+
+            const row = `<tr>
+                <td>Day ${d}</td>
+                <td>Juz ${startJuz} - ${endJuz} (x3)</td>
+                <td><button class="check-btn" onclick="toggleCheck(this)"><i class="far fa-circle"></i></button></td>
+            </tr>`;
+            quranBody.innerHTML += row;
+        }
+
+        function toggleCheck(btn) {
+            btn.innerHTML = btn.innerHTML.includes('far fa-circle') 
+                ? '<i class="fas fa-check-circle"></i>' 
+                : '<i class="far fa-circle"></i>';
+            if(btn.innerHTML.includes('check-circle')) {
+                confetti({ particleCount: 15, spread: 20, origin: { y: 0.8 }, colors: ['#39FF14'] });
+            }
+        }
+
+        // --- 3. VISUAL EFFECTS ---
         document.getElementById('mainPhoto').addEventListener('click', () => {
-            confetti({
-                particleCount: 40,
-                spread: 60,
-                colors: ['#F48FB1', '#FFD700', '#FFFFFF']
-            });
+            confetti({ particleCount: 50, spread: 70, colors: ['#F48FB1', '#FFD700', '#FFFFFF'] });
         });
 
-        // 2. Create Floating Lanterns
         function createLantern() {
             const lantern = document.createElement('i');
             lantern.className = 'fas fa-lightbulb lantern';
             lantern.style.left = Math.random() * 100 + 'vw';
-            const size = Math.random() * 10 + 10 + 'px';
-            lantern.style.fontSize = size;
-            lantern.style.animationDuration = Math.random() * 10 + 15 + 's';
+            lantern.style.fontSize = Math.random() * 10 + 12 + 'px';
+            lantern.style.animationDuration = Math.random() * 8 + 12 + 's';
             document.getElementById('lantern-layer').appendChild(lantern);
             setTimeout(() => { lantern.remove(); }, 20000);
         }
-        setInterval(createLantern, 3000);
+        setInterval(createLantern, 4000);
 
-        // 3. Falling Sparkles
         function createSparkle() {
+            if (document.hidden) return;
             const sparkle = document.createElement('div');
             sparkle.classList.add('sparkle');
             sparkle.style.left = Math.random() * 100 + 'vw';
-            sparkle.style.top = '-5vh';
-            sparkle.style.width = Math.random() * 5 + 2 + 'px';
+            sparkle.style.top = '-2vh';
+            sparkle.style.width = Math.random() * 4 + 2 + 'px';
             sparkle.style.height = sparkle.style.width;
-            sparkle.style.animationDuration = Math.random() * 4 + 4 + 's';
-            sparkle.style.background = Math.random() > 0.5 ? 'var(--pink)' : '#FFF';
+            sparkle.style.animationDuration = Math.random() * 3 + 4 + 's';
             document.body.appendChild(sparkle);
-            setTimeout(() => { sparkle.remove(); }, 8000);
+            setTimeout(() => { sparkle.remove(); }, 7000);
         }
-        setInterval(createSparkle, 200);
+        setInterval(createSparkle, 300);
 
+        // --- 4. UTILITIES ---
         function searchMusic() {
             const query = document.getElementById('musicSearch').value;
-            if(query) { window.open("https://www.youtube.com/results?search_query=" + encodeURIComponent(query), "_blank"); }
+            if(query) window.open("https://www.youtube.com/results?search_query=" + encodeURIComponent(query), "_blank");
         }
 
         function checkPass() {
             const pass = document.getElementById('passInput').value.toLowerCase();
-            if(pass === 'nuseybah' || pass === 'nusi' || pass === '123') {
-                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#F8BBD0', '#FFD700', '#FFFFFF'] });
+            if(['nuseybah', 'nusi', '123'].includes(pass)) {
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                 document.getElementById('secret-content').style.display = 'block';
                 document.getElementById('passInput').style.display = 'none';
                 document.getElementById('lock-title').style.display = 'none';
