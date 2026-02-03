@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuseybah's Sanctuary</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Amiri:wght@700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@700&family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     
@@ -17,103 +17,143 @@
         }
 
         body, html {
-            margin: 0; padding: 0; height: 100%;
+            margin: 0; padding: 0; min-height: 100%;
             background: linear-gradient(135deg, #FFD1DC 0%, #3E2723 100%);
             font-family: 'Montserrat', sans-serif;
             color: white; overflow-x: hidden;
         }
 
+        /* Sparkle Animation */
         .sparkle {
             position: fixed; background: #fff; border-radius: 50%;
             pointer-events: none; opacity: 0.6;
             animation: fall linear infinite; z-index: 1;
         }
-
         @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
 
         .main-wrapper {
             display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; padding: 20px; position: relative; z-index: 10;
+            min-height: 100vh; padding: 40px 20px; position: relative; z-index: 10;
         }
 
         .container {
             width: 100%; max-width: 450px;
-            background: rgba(45, 27, 24, 0.9);
-            backdrop-filter: blur(20px); border-radius: 40px;
+            background: rgba(45, 27, 24, 0.92);
+            backdrop-filter: blur(20px); border-radius: 45px;
             padding: 40px 25px; border: 2px solid var(--pink);
-            text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            text-align: center; box-shadow: 0 30px 70px rgba(0,0,0,0.7);
         }
+
+        /* ELONGATED ARABIC NAME */
+        .arabic-name {
+            font-family: 'Reem Kufi Fun', sans-serif;
+            font-size: 5.5rem;
+            margin: 0; color: white;
+            text-shadow: 0 0 20px var(--hot-pink);
+            line-height: 1;
+        }
+
+        /* THE BLOOMING FLOWER CSS */
+        .flower-container {
+            margin: 20px 0;
+            display: flex; justify-content: center;
+        }
+        .flower {
+            position: relative; width: 80px; height: 80px;
+            animation: bloom 4s ease-in-out forwards;
+        }
+        .petal {
+            position: absolute; width: 40px; height: 40px;
+            background: var(--hot-pink);
+            border-radius: 50% 50% 0 50%;
+            opacity: 0.9;
+            transform-origin: bottom right;
+            box-shadow: 0 0 10px rgba(244, 143, 177, 0.5);
+        }
+        @keyframes bloom {
+            0% { transform: scale(0.2) rotate(0deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: scale(1.2) rotate(360deg); }
+        }
+        .petal:nth-child(1) { transform: rotate(0deg); }
+        .petal:nth-child(2) { transform: rotate(72deg); }
+        .petal:nth-child(3) { transform: rotate(144deg); }
+        .petal:nth-child(4) { transform: rotate(216deg); }
+        .petal:nth-child(5) { transform: rotate(288deg); }
 
         .profile-img {
             width: 150px; height: 150px;
-            border-radius: 50%;
-            border: 4px solid var(--pink);
-            box-shadow: 0 0 20px var(--hot-pink);
-            object-fit: cover;
-            margin: 10px auto 20px;
-            display: block;
-        }
-
-        .arabic-name {
-            font-family: 'Amiri', serif; font-size: 3.5rem;
-            margin: 0; color: #fff; text-shadow: 0 0 15px var(--hot-pink);
+            border-radius: 50%; border: 4px solid var(--pink);
+            box-shadow: 0 0 25px var(--hot-pink);
+            object-fit: cover; margin: 10px auto; display: block;
         }
 
         .english-name {
-            font-family: 'Dancing Script', cursive; font-size: 2.8rem;
-            color: var(--pink); margin-top: -10px; margin-bottom: 5px;
+            font-family: 'Dancing Script', cursive; font-size: 3rem;
+            color: var(--pink); margin-top: -10px;
         }
 
+        /* Search & Player */
         .player {
             background: rgba(255, 255, 255, 0.08); border-radius: 25px;
-            padding: 15px; margin: 20px 0; border: 1px solid rgba(248, 187, 208, 0.2);
+            padding: 20px; margin: 25px 0; border: 1px solid rgba(248, 187, 208, 0.2);
         }
+        .search-container { display: flex; gap: 8px; margin-bottom: 15px; }
+        .search-bar {
+            flex: 1; background: rgba(255,255,255,0.1); border: 1px solid var(--pink);
+            padding: 12px; border-radius: 12px; color: white; outline: none;
+        }
+        .search-btn { background: var(--pink); color: var(--chocolate); border: none; border-radius: 12px; padding: 0 18px; cursor: pointer; }
 
         .controls { display: flex; justify-content: center; align-items: center; gap: 15px; }
-        .btn { background: none; border: none; color: var(--pink); cursor: pointer; transition: 0.3s; font-size: 1rem; }
-        .play-btn { font-size: 2.5rem; color: #fff; }
+        .btn { background: none; border: none; color: var(--pink); cursor: pointer; font-size: 1.1rem; }
+        .play-btn { font-size: 3rem; color: #fff; }
 
         .telegram-link {
             display: inline-flex; align-items: center;
             background: var(--neon-green); color: #000;
-            padding: 12px 25px; border-radius: 50px;
+            padding: 14px 35px; border-radius: 50px;
             text-decoration: none; font-weight: bold;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
-            margin-bottom: 20px;
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.6);
+            margin-bottom: 25px; transition: 0.3s;
         }
 
         .secret-section {
-            margin-top: 10px; padding: 20px; border-radius: 25px;
-            background: rgba(248, 187, 208, 0.1); border: 1px dashed var(--pink);
+            margin-top: 10px; padding: 25px; border-radius: 30px;
+            background: rgba(248, 187, 208, 0.05); border: 1px dashed var(--pink);
         }
-
-        input {
-            background: rgba(255, 255, 255, 0.15); border: 1px solid var(--pink);
-            padding: 10px; border-radius: 10px; color: white;
-            text-align: center; width: 80%; margin-bottom: 10px; outline: none;
+        .pass-input {
+            background: rgba(255, 255, 255, 0.1); border: 1px solid var(--pink);
+            padding: 12px; border-radius: 12px; color: white; text-align: center; width: 85%; margin-bottom: 12px;
         }
-
-        #secret-content {
-            display: none; font-family: 'Dancing Script', cursive;
-            font-size: 1.3rem; color: #fff; line-height: 1.4;
-            animation: zoomIn 0.8s ease-out;
-        }
-
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        #secret-content { display: none; font-family: 'Dancing Script', cursive; font-size: 1.4rem; line-height: 1.6; }
     </style>
 </head>
 <body>
 
     <div class="main-wrapper">
         <div class="container">
-            <div class="arabic-name">نسيبة</div>
+            <div class="arabic-name">نُسَيْبَة</div>
             
+            <div class="flower-container">
+                <div class="flower">
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                </div>
+            </div>
+
             <img src="nusi.jpg" alt="Nuseybah" class="profile-img">
             
             <div class="english-name">𝓝𝓾𝓮𝓼𝔂𝓫𝓪𝓱</div>
-            <p style="font-style: italic; opacity: 0.8; font-size: 0.85rem;">"Allah is Beautiful & He loves beauty"</p>
-
+            
             <div class="player">
+                <div class="search-container">
+                    <input type="text" id="musicSearch" class="search-bar" placeholder="Find your Nasheed...">
+                    <button class="search-btn" onclick="searchYouTube()"><i class="fas fa-search"></i></button>
+                </div>
                 <div class="controls">
                     <button class="btn"><i class="fas fa-step-backward"></i></button>
                     <button class="btn">10s <i class="fas fa-undo"></i></button>
@@ -128,14 +168,13 @@
             </a>
 
             <div class="secret-section">
-                <div id="lock-title" style="margin-bottom: 10px; font-weight: bold; color: var(--pink);">🔒 A Secret for You</div>
-                <input type="password" id="passInput" placeholder="Password: Your Name">
+                <div id="lock-title" style="margin-bottom: 12px; font-weight: bold; color: var(--pink);">🔒 A Secret Surprise</div>
+                <input type="password" id="passInput" class="pass-input" placeholder="Password: Your Name">
                 <br>
-                <button class="btn" onclick="checkPass()" style="background: var(--pink); color: var(--chocolate); padding: 8px 20px; border-radius: 10px; font-weight: bold;">Unlock</button>
+                <button class="btn" onclick="checkPass()" style="background: var(--pink); color: var(--chocolate); padding: 10px 25px; border-radius: 12px; font-weight: bold;">Unlock Surprise</button>
                 
                 <div id="secret-content">
-                    <span style="font-size: 1.6rem; color: var(--pink);">✨ Dearest Nuseybah ✨</span><br><br>
-                    They say chocolate is the sweetest thing in the world, but they clearly haven't met you yet! 
+                    <span style="font-size: 1.8rem; color: var(--pink);">✨ Dearest Nuseybah ✨</span><br><br>
                     You are a masterpiece created by the Best of Creators, and your heart is as bright as 
                     your favorite shade of pink. 🎀<br><br>
                     May Allah always preserve your beautiful smile and fill your life 
@@ -154,29 +193,27 @@
             sparkle.style.top = '-5vh';
             sparkle.style.width = Math.random() * 5 + 2 + 'px';
             sparkle.style.height = sparkle.style.width;
-            sparkle.style.animationDuration = Math.random() * 3 + 4 + 's';
+            sparkle.style.animationDuration = Math.random() * 4 + 4 + 's';
             sparkle.style.background = Math.random() > 0.5 ? '#F8BBD0' : '#FFF';
             document.body.appendChild(sparkle);
-            setTimeout(() => { sparkle.remove(); }, 7000);
+            setTimeout(() => { sparkle.remove(); }, 8000);
         }
         setInterval(createSparkle, 200);
+
+        function searchYouTube() {
+            const query = document.getElementById('musicSearch').value;
+            if(query) window.open("https://www.youtube.com/results?search_query=" + encodeURIComponent(query), "_blank");
+        }
 
         function checkPass() {
             const pass = document.getElementById('passInput').value.toLowerCase();
             if(pass === 'nuseybah' || pass === 'nusi' || pass === '123') {
-                confetti({
-                    particleCount: 150,
-                    spread: 70,
-                    origin: { y: 0.6 },
-                    colors: ['#F8BBD0', '#3E2723', '#FFFFFF']
-                });
+                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#F8BBD0', '#3E2723', '#FFFFFF'] });
                 document.getElementById('secret-content').style.display = 'block';
                 document.getElementById('passInput').style.display = 'none';
                 document.getElementById('lock-title').style.display = 'none';
                 event.target.style.display = 'none';
-            } else {
-                alert("Hint: It's your name!");
-            }
+            } else { alert("Hint: It's your name!"); }
         }
     </script>
 </body>
