@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leyla's Sanctuary</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,700;1,700&family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Nuseybah's Sanctuary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     
@@ -24,7 +24,19 @@
             color: white; overflow-x: hidden;
         }
 
-        /* Sparkle Animation */
+        /* 1. Magical Floating Lanterns */
+        .lantern {
+            position: fixed; color: var(--dim-yellow);
+            opacity: 0.4; pointer-events: none;
+            animation: floatUp linear infinite; z-index: 1;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) translateX(0); opacity: 0; }
+            20% { opacity: 0.4; }
+            100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
+        }
+
+        /* Sparkles */
         .sparkle {
             position: fixed; background: #fff; border-radius: 50%;
             pointer-events: none; opacity: 0.6;
@@ -37,156 +49,187 @@
             min-height: 100vh; padding: 40px 20px; position: relative; z-index: 10;
         }
 
+        /* 2. Frosted Glass Container */
         .container {
             width: 100%; max-width: 450px;
-            background: rgba(45, 27, 24, 0.92);
-            backdrop-filter: blur(20px); border-radius: 45px;
-            padding: 40px 25px; border: 2px solid var(--pink);
-            text-align: center; box-shadow: 0 30px 70px rgba(0,0,0,0.7);
+            background: rgba(45, 27, 24, 0.85);
+            backdrop-filter: blur(25px); border-radius: 50px;
+            padding: 45px 30px; border: 1px solid rgba(248, 187, 208, 0.3);
+            text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            position: relative;
         }
 
-        /* AMAZING ELONGATED ARABIC NAME */
         .arabic-name {
-            font-family: 'Amiri', serif; font-size: 5rem;
-            margin: 0; color: white; text-shadow: 0 0 15px var(--hot-pink);
-            line-height: 1.2; direction: rtl;
+            font-family: 'Amiri', serif; font-size: 5.5rem;
+            margin: 0; color: white; text-shadow: 0 0 20px var(--hot-pink);
+            line-height: 1.1; direction: rtl;
         }
 
-        /* Flower & Moon/Star Decorations */
         .flower-container { margin: 15px 0; display: flex; justify-content: center; position: relative; }
-        .moon-star { position: absolute; font-size: 1.5rem; animation: float 3s ease-in-out infinite alternate; }
-        .moon { color: var(--dim-yellow); left: 20%; top: 0; text-shadow: 0 0 10px var(--dim-yellow); }
-        .star { color: var(--neon-green); right: 20%; bottom: 0; text-shadow: 0 0 10px var(--neon-green); font-size: 1rem; }
-        @keyframes float { from { transform: translateY(0); } to { transform: translateY(-15px); } }
-
-        .flower { position: relative; width: 60px; height: 60px; animation: bloom 4s ease-in-out forwards; }
-        .petal {
-            position: absolute; width: 30px; height: 30px;
-            background: var(--hot-pink); border-radius: 50% 50% 0 50%;
-            transform-origin: bottom right; box-shadow: 0 0 10px rgba(244, 143, 177, 0.5);
+        .ramadan-icon { 
+            position: absolute; font-size: 1.5rem; color: var(--dim-yellow);
+            animation: bounce 3s ease-in-out infinite alternate;
+            text-shadow: 0 0 15px var(--dim-yellow);
         }
-        @keyframes bloom { 0% { transform: scale(0.2) rotate(0deg); opacity: 0; } 100% { transform: scale(1.2) rotate(360deg); opacity: 1; } }
+        .left-moon { left: 10%; top: 0; }
+        .right-star { right: 10%; bottom: 0; color: var(--neon-green); font-size: 1rem; }
+        @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-15px); } }
+
+        .flower { position: relative; width: 70px; height: 70px; animation: bloom 4s ease-in-out forwards; }
+        .petal {
+            position: absolute; width: 35px; height: 35px;
+            background: var(--hot-pink); border-radius: 50% 50% 0 50%;
+            transform-origin: bottom right; box-shadow: 0 0 15px rgba(244, 143, 177, 0.6);
+        }
+        @keyframes bloom { 0% { transform: scale(0) rotate(0deg); opacity: 0; } 100% { transform: scale(1.2) rotate(360deg); opacity: 1; } }
         .petal:nth-child(1) { transform: rotate(0deg); } .petal:nth-child(2) { transform: rotate(72deg); } 
         .petal:nth-child(3) { transform: rotate(144deg); } .petal:nth-child(4) { transform: rotate(216deg); } 
         .petal:nth-child(5) { transform: rotate(288deg); }
 
+        /* 3. Interactive Profile Image */
         .profile-img {
-            width: 150px; height: 150px;
+            width: 160px; height: 160px;
             border-radius: 50%; border: 4px solid var(--pink);
-            box-shadow: 0 0 25px var(--hot-pink);
-            object-fit: cover; margin: 10px auto; display: block;
+            box-shadow: 0 0 30px var(--hot-pink);
+            object-fit: cover; margin: 15px auto; display: block;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
         }
+        .profile-img:hover { transform: scale(1.1) rotate(3deg); }
 
-        /* RAMADAN MUBARAK GREEN & GOLD */
-        .ramadan-text {
-            font-size: 1.4rem; font-weight: bold; margin: 15px 0;
-            background: linear-gradient(to right, #4CAF50, #FFD700);
+        .ramadan-banner {
+            margin: 20px 0; font-weight: bold; font-size: 1.4rem;
+            background: linear-gradient(to right, #4CAF50, #FFD700, #4CAF50);
+            background-size: 200% auto;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            animation: shine 3s linear infinite;
         }
+        @keyframes shine { to { background-position: 200% center; } }
 
         .english-name {
-            font-family: 'Dancing Script', cursive; font-size: 3.2rem;
-            color: var(--pink); margin-top: 5px;
+            font-family: 'Dancing Script', cursive; font-size: 3.5rem;
+            color: var(--pink); margin: 5px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* SPECIAL MUSIC PLAYER */
         .player {
-            background: rgba(255, 255, 255, 0.08); border-radius: 25px;
-            padding: 20px; margin: 25px 0; border: 1px solid rgba(248, 187, 208, 0.2);
+            background: rgba(255, 255, 255, 0.05); border-radius: 25px;
+            padding: 20px; margin: 25px 0; border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .music-title { font-family: 'Amiri', serif; font-size: 1.1rem; color: var(--dim-yellow); margin-bottom: 5px; }
-        .controls { display: flex; justify-content: center; align-items: center; }
-        .play-btn { font-size: 3.5rem; color: var(--dim-yellow); cursor: pointer; transition: 0.3s; text-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
-        .play-btn:hover { transform: scale(1.1); }
+        .search-container { display: flex; gap: 10px; }
+        .search-bar {
+            flex: 1; background: rgba(0,0,0,0.2); border: 1px solid var(--pink);
+            padding: 14px; border-radius: 15px; color: white; outline: none;
+            font-family: 'Montserrat', sans-serif; transition: 0.3s;
+        }
+        .search-bar:focus { border-color: var(--dim-yellow); box-shadow: 0 0 10px rgba(255,215,0,0.2); }
+        .search-btn { 
+            background: var(--pink); color: var(--chocolate); 
+            border: none; border-radius: 15px; padding: 0 20px; cursor: pointer;
+            font-size: 1.1rem; transition: 0.3s;
+        }
+        .search-btn:hover { background: var(--hot-pink); transform: translateY(-2px); }
 
-        .telegram-link {
-            display: inline-flex; align-items: center;
-            background: var(--neon-green); color: #000;
-            padding: 14px 35px; border-radius: 50px;
-            text-decoration: none; font-weight: bold; margin-bottom: 25px;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+        .telegram-btn {
+            display: inline-flex; background: var(--neon-green); color: #000;
+            width: 60px; height: 60px; border-radius: 50%;
+            align-items: center; justify-content: center; font-size: 1.8rem;
+            text-decoration: none; box-shadow: 0 10px 20px rgba(57, 255, 20, 0.3);
+            margin-bottom: 30px; transition: 0.3s;
         }
+        .telegram-btn:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 25px rgba(57, 255, 20, 0.5); }
 
         .secret-section {
-            margin-top: 10px; padding: 25px; border-radius: 30px;
-            background: rgba(248, 187, 208, 0.05); border: 1px dashed var(--pink);
+            padding: 25px; border-radius: 35px;
+            background: rgba(255, 255, 255, 0.03); border: 1px dashed var(--pink);
         }
         .pass-input {
-            background: rgba(255, 255, 255, 0.1); border: 1px solid var(--pink);
-            padding: 12px; border-radius: 12px; color: white; text-align: center; width: 85%; margin-bottom: 12px; outline: none;
+            background: rgba(255, 255, 255, 0.08); border: 1px solid var(--pink);
+            padding: 14px; border-radius: 15px; color: white; text-align: center; width: 85%; margin-bottom: 15px; outline: none;
         }
-        #secret-content { display: none; font-family: 'Dancing Script', cursive; font-size: 1.4rem; line-height: 1.6; }
+        #secret-content { 
+            display: none; font-family: 'Courier New', monospace; 
+            font-size: 1.1rem; line-height: 1.6; text-align: left;
+            animation: fadeIn 1s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
+    <div id="lantern-layer"></div>
+
     <div class="main-wrapper">
         <div class="container">
-            <div class="arabic-name">لَــــــــــــيْـلَى</div>
+            <div class="arabic-name">نُــــــــــــسَيْبَة</div>
             
             <div class="flower-container">
-                <div class="moon-star moon"><i class="fas fa-moon"></i></div>
+                <i class="fas fa-moon ramadan-icon left-moon"></i>
                 <div class="flower">
                     <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
                 </div>
-                <div class="moon-star star"><i class="fas fa-star"></i></div>
+                <i class="fas fa-star ramadan-icon right-star"></i>
             </div>
 
-            <img src="leyla.jpg" alt="Leyla" class="profile-img">
+            <img src="nusi.jpg" alt="Nuseybah" class="profile-img" id="mainPhoto">
             
-            <div class="ramadan-text">𝓡𝓐𝓜𝓐𝓓𝓐𝓝 𝓜𝓤𝓑𝓐𝓡𝓐𝓚</div>
+            <div class="ramadan-banner">
+                🌙 𝓡𝓪𝓶𝓪𝓭𝓪𝓷 𝓜𝓾𝓫𝓪𝓻𝓪𝓴 ✨
+            </div>
 
-            <div class="english-name">𝓛𝓮𝔂𝓵𝓪</div>
+            <div class="english-name">𝓝𝓾𝓼𝓮𝔂𝓫𝓪𝓱</div>
             
             <div class="player">
-                <div class="music-title">قُولُوا لَهَا أَنَّنِي.. ✨</div>
-                <div class="controls">
-                    <audio id="mySong">
-                        <source src="kulu_leha.m4a" type="audio/mp4">
-                    </audio>
-                    <i class="fas fa-play-circle play-btn" id="playIcon" onclick="togglePlay()"></i>
+                <div class="search-container">
+                    <input type="text" id="musicSearch" class="search-bar" placeholder="Nasheed for Nuseybah...">
+                    <button class="search-btn" onclick="searchMusic()"><i class="fas fa-search"></i></button>
                 </div>
-                <p style="font-size: 0.7rem; opacity: 0.6; margin-top: 10px;">A Special Poem for Leyla</p>
             </div>
 
-            <a href="https://t.me/strong3505" target="_blank" class="telegram-link">
-                <i class="fab fa-telegram-plane"></i> @strong3505
+            <a href="https://t.me/nusi53" target="_blank" class="telegram-btn">
+                <i class="fab fa-telegram-plane"></i>
             </a>
 
             <div class="secret-section">
-                <div id="lock-title" style="margin-bottom: 12px; font-weight: bold; color: var(--pink);">🔒 A Surprise for Leyla</div>
-                <input type="password" id="passInput" class="pass-input" placeholder="Password: leyla">
+                <div id="lock-title" style="margin-bottom: 12px; font-weight: bold; color: var(--pink);">🔒 A Surprise for Nuseybah</div>
+                <input type="password" id="passInput" class="pass-input" placeholder="Password: nuseybah">
                 <br>
-                <button style="background: var(--pink); color: var(--chocolate); padding: 10px 25px; border-radius: 12px; border:none; font-weight: bold; cursor:pointer;" onclick="checkPass()">Unlock Surprise</button>
+                <button onclick="checkPass()" style="background: var(--pink); color: var(--chocolate); padding: 12px 30px; border-radius: 15px; border:none; font-weight: bold; cursor:pointer;">Unlock Surprise</button>
                 
                 <div id="secret-content">
-                    <span style="font-size: 1.8rem; color: var(--pink);">✨ Dearest Leyla ✨</span><br><br>
-                    Ramadan Mubarak! May this holy month bring you peace, joy, and endless blessings. 🌙<br><br>
-                    You are a masterpiece created by the Best of Creators. Your heart is as sweet as 
-                    chocolate and your soul is as beautiful as a blooming rose. 🎀<br><br>
-                    <strong>Stay strong and beautiful! 🍫✨</strong>
+                    ✨ 𝙳𝚎𝚊𝚛𝚎𝚜𝚝 𝙽𝚞𝚜𝚎𝚢𝚋𝚊𝚑 ✨<br><br>
+                    𝚁𝚊𝚖𝚊𝚍𝚊𝚗 𝙼𝚞𝚋𝚊𝚛𝚊𝚔! 𝙼𝚊𝚢 𝚝𝚑𝚒𝚜 𝚑𝚘𝚕𝚢 𝚖𝚘𝚗𝚝𝚑 𝚋𝚛𝚒𝚗𝚐 𝚢𝚘𝚞 𝚙𝚎𝚊𝚌𝚎, 𝚓𝚘𝚢, 𝚊𝚗𝚍 𝚎𝚗𝚍𝚕𝚎𝚜𝚜 𝚋𝚕𝚎𝚜𝚜𝚒𝚗𝚐𝚜. 🌙<br><br>
+                    𝚈𝚘𝚞 𝚊𝚛𝚎 𝚊 𝚖𝚊𝚜𝚝𝚎𝚛𝚙𝚒𝚎𝚌𝚎 𝚌𝚛𝚎𝚊𝚝𝚎𝚍 𝚋𝚢 𝚝𝚑𝚎 𝙱𝚎𝚜𝚝 𝚘𝚏 𝙲𝚛𝚎𝚊𝚝𝚘𝚛𝚜. 𝚈𝚘𝚞𝚛 𝚑𝚎𝚊𝚛𝚝 𝚒𝚜 𝚊𝚜 𝚋𝚛𝚒𝚐𝚑𝚝 𝚊𝚜 𝚙𝚒𝚗𝚔 𝚊𝚗𝚍 𝚊𝚜 𝚜𝚠𝚎𝚎𝚝 𝚊𝚜 𝚌𝚑𝚘𝚌𝚘𝚕𝚊𝚝𝚎. 🎀<br><br>
+                    𝚂𝚝𝚊𝚢 𝚜𝚝𝚛𝚘𝚗𝚐 𝚊𝚗𝚍 𝚋𝚎𝚊𝚞𝚝𝚒𝚏𝚞𝚕! 🍫✨
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const song = document.getElementById("mySong");
-        const playIcon = document.getElementById("playIcon");
+        // 1. Photo Click Confetti
+        document.getElementById('mainPhoto').addEventListener('click', () => {
+            confetti({
+                particleCount: 40,
+                spread: 60,
+                colors: ['#F48FB1', '#FFD700', '#FFFFFF']
+            });
+        });
 
-        function togglePlay() {
-            if (song.paused) {
-                song.play();
-                playIcon.classList.remove("fa-play-circle");
-                playIcon.classList.add("fa-pause-circle");
-            } else {
-                song.pause();
-                playIcon.classList.remove("fa-pause-circle");
-                playIcon.classList.add("fa-play-circle");
-            }
+        // 2. Create Floating Lanterns
+        function createLantern() {
+            const lantern = document.createElement('i');
+            lantern.className = 'fas fa-lightbulb lantern';
+            lantern.style.left = Math.random() * 100 + 'vw';
+            const size = Math.random() * 10 + 10 + 'px';
+            lantern.style.fontSize = size;
+            lantern.style.animationDuration = Math.random() * 10 + 15 + 's';
+            document.getElementById('lantern-layer').appendChild(lantern);
+            setTimeout(() => { lantern.remove(); }, 20000);
         }
+        setInterval(createLantern, 3000);
 
+        // 3. Falling Sparkles
         function createSparkle() {
             const sparkle = document.createElement('div');
             sparkle.classList.add('sparkle');
@@ -195,16 +238,21 @@
             sparkle.style.width = Math.random() * 5 + 2 + 'px';
             sparkle.style.height = sparkle.style.width;
             sparkle.style.animationDuration = Math.random() * 4 + 4 + 's';
-            sparkle.style.background = Math.random() > 0.5 ? '#F8BBD0' : '#FFF';
+            sparkle.style.background = Math.random() > 0.5 ? 'var(--pink)' : '#FFF';
             document.body.appendChild(sparkle);
             setTimeout(() => { sparkle.remove(); }, 8000);
         }
         setInterval(createSparkle, 200);
 
+        function searchMusic() {
+            const query = document.getElementById('musicSearch').value;
+            if(query) { window.open("https://www.youtube.com/results?search_query=" + encodeURIComponent(query), "_blank"); }
+        }
+
         function checkPass() {
             const pass = document.getElementById('passInput').value.toLowerCase();
-            if(pass === 'leyla' || pass === '123') {
-                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#F8BBD0', '#3E2723', '#FFFFFF'] });
+            if(pass === 'nuseybah' || pass === 'nusi' || pass === '123') {
+                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#F8BBD0', '#FFD700', '#FFFFFF'] });
                 document.getElementById('secret-content').style.display = 'block';
                 document.getElementById('passInput').style.display = 'none';
                 document.getElementById('lock-title').style.display = 'none';
